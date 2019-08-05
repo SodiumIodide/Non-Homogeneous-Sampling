@@ -1,15 +1,16 @@
+#ifndef _LINEAR_GEOMETRY_GEN_H
+#define _LINEAR_GEOMETRY_GEN_H
+
 #include <math.h>
 #include <stdlib.h>
 
-static inline double linear_chord(double chord_initial, double chord_slope, double distance) {
-    return chord_initial + chord_slope * distance;
-}
+#include "linear_chord.h"
 
-void get_geometry(double start_value_0, double end_value_0, double start_value_1, double end_value_1, double end_dist, long num_divs, double** x_delta, double** x_arr, int** materials, long* num_cells) {
+void get_geometry_linear(double start_value_0, double end_value_0, double start_value_1, double end_value_1, double end_dist, long num_divs, double** x_delta, double** x_arr, int** materials, long* num_cells) {
     // Computational values
     int material_num;
     double rand_num;
-    double chord, chord_start, chord_slope;
+    double chord_start, chord_slope;
 
     // Updateable values for sizing
     double cons_dist = 0.0;  // cm
@@ -24,7 +25,7 @@ void get_geometry(double start_value_0, double end_value_0, double start_value_1
     *num_cells = 0;
 
     // Seed generator
-    srand(1234);
+    srand(SEED);
 
     // Determine first material to use
     // For linear model, initial distance is at 0.0 and so the probability is equivalent to the constant term ratio
@@ -87,3 +88,5 @@ void get_geometry(double start_value_0, double end_value_0, double start_value_1
         material_num = (material_num == 0) ? 1 : 0;
     }
 }
+
+#endif

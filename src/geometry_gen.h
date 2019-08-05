@@ -1,3 +1,6 @@
+#ifndef _GEOMETRY_GEN_H
+#define _GEOMETRY_GEN_H
+
 #include <math.h>
 #include <stdlib.h>
 
@@ -19,7 +22,7 @@ void get_geometry(double chord_0, double chord_1, double end_dist, long num_divs
     *num_cells = 0;
 
     // Seed generator
-    srand(1234);
+    srand(SEED);
 
     // Determine first material to use
     const double prob_0 = chord_0 / (chord_0 + chord_1);
@@ -74,3 +77,5 @@ void get_geometry(double chord_0, double chord_1, double end_dist, long num_divs
         material_num = (material_num == 0) ? 1 : 0;
     }
 }
+
+#endif
